@@ -1,48 +1,176 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to WholeTail Pet</title>
+
+  <title>WholeTail Pet Pricing Calculator</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       background: #f7f3ed;
-      padding: 80px 20px;
+      padding: 50px 20px;
       color: #333333;
     }
-    .card {
+
+    .calculator {
       max-width: 500px;
       margin: auto;
-      padding: 30px;
       background: white;
+      padding: 35px;
       border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     }
+
     h1 {
+      text-align: center;
       color: #5b4636;
-      font-size: 36px;
+      margin-bottom: 10px;
     }
+
+    .subtitle {
+      text-align: center;
+      color: #777777;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
     button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
       background: #5b4636;
       color: white;
       border: none;
-      padding: 14px 28px;
       border-radius: 10px;
-      cursor: pointer;
       font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f4f1ec;
+      border-radius: 10px;
+    }
+
+    .result p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .profit {
+      font-size: 24px;
+      font-weight: bold;
+      color: #5b4636;
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Welcome to WholeTail Pet!</h1>
-    <p>Premium Outdoor Products for Pets</p>
-    <p>Comfort, protection, and style for every adventure.</p>
-    <button onclick="alert('Welcome to WholeTail Pet!')">
-      Click Me
+
+  <div class="calculator">
+
+    <h1>WholeTail Pet</h1>
+
+    <p class="subtitle">
+      Pricing & Profit Calculator
+    </p>
+
+    <label>Product Cost ($)</label>
+    <input type="number" id="productCost" placeholder="Example: 10">
+
+    <label>Selling Price ($)</label>
+    <input type="number" id="sellingPrice" placeholder="Example: 29.99">
+
+    <label>Shipping Cost ($)</label>
+    <input type="number" id="shippingCost" placeholder="Example: 5">
+
+    <label>Shopify Fee ($)</label>
+    <input type="number" id="shopifyFee" placeholder="Example: 1.20">
+
+    <label>Advertising Cost ($)</label>
+    <input type="number" id="advertisingCost" placeholder="Example: 3">
+
+    <button onclick="calculateProfit()">
+      Calculate Profit
     </button>
+
+    <div class="result">
+
+      <p>
+        Net Profit:
+        <span class="profit" id="netProfit">$0.00</span>
+      </p>
+
+      <p>
+        Profit Margin:
+        <span id="profitMargin">0%</span>
+      </p>
+
+    </div>
+
   </div>
+
+  <script>
+
+    function calculateProfit() {
+
+      const productCost =
+        Number(document.getElementById("productCost").value);
+
+      const sellingPrice =
+        Number(document.getElementById("sellingPrice").value);
+
+      const shippingCost =
+        Number(document.getElementById("shippingCost").value);
+
+      const shopifyFee =
+        Number(document.getElementById("shopifyFee").value);
+
+      const advertisingCost =
+        Number(document.getElementById("advertisingCost").value);
+
+      const netProfit =
+        sellingPrice
+        - productCost
+        - shippingCost
+        - shopifyFee
+        - advertisingCost;
+
+      const profitMargin =
+        sellingPrice > 0
+        ? (netProfit / sellingPrice) * 100
+        : 0;
+
+      document.getElementById("netProfit").textContent =
+        "$" + netProfit.toFixed(2);
+
+      document.getElementById("profitMargin").textContent =
+        profitMargin.toFixed(1) + "%";
+    }
+
+  </script>
+
 </body>
 </html>

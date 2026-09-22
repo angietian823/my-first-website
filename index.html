@@ -106,8 +106,9 @@
     <label>Shipping Cost ($)</label>
     <input type="number" id="shippingCost" placeholder="Example: 5">
 
-    <label>Shopify Fee ($)</label>
-    <input type="number" id="shopifyFee" placeholder="Example: 1.20">
+    <p>
+      Shopify Fee will be calculated automatically.
+    </p>
 
     <label>Advertising Cost ($)</label>
     <input type="number" id="advertisingCost" placeholder="Example: 3">
@@ -117,6 +118,11 @@
     </button>
 
     <div class="result">
+
+      <p>
+        Shopify Fee:
+        <span id="calculatedFee">$0.00</span>
+      </p>
 
       <p>
         Net Profit:
@@ -146,7 +152,7 @@
         Number(document.getElementById("shippingCost").value);
 
       const shopifyFee =
-        Number(document.getElementById("shopifyFee").value);
+        sellingPrice * 0.029 + 0.30;
 
       const advertisingCost =
         Number(document.getElementById("advertisingCost").value);
@@ -166,6 +172,9 @@
       document.getElementById("netProfit").textContent =
         "$" + netProfit.toFixed(2);
 
+      document.getElementById("calculatedFee").textContent =
+        "$" + shopifyFee.toFixed(2);
+      
       document.getElementById("profitMargin").textContent =
         profitMargin.toFixed(1) + "%";
     }
